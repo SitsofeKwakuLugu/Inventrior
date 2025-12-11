@@ -1,0 +1,285 @@
+/* ----------------------------------------------------------
+   INVENTRIOR COLOR PALETTE
+-----------------------------------------------------------*/
+
+:root {
+    --primary-navy: #0b2040;      /* Deep navy */
+    --primary-teal: #0ea5a5;      /* Vibrant teal */
+    --light-silver: #f0f4f8;      /* Light silver/off-white */
+    --card-bg: #fafbfc;           /* Very light gray */
+    --text-dark: #1e293b;         /* Dark text */
+    --text-light: #64748b;        /* Light gray text */
+}
+
+/* ----------------------------------------------------------
+   GENERAL STYLES
+-----------------------------------------------------------*/
+
+body {
+    background-color: var(--light-silver);
+    color: var(--text-dark);
+    font-family: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+.inventrior-bg {
+    background: var(--primary-navy);
+}
+
+.inventrior-teal {
+    background: var(--primary-teal);
+}
+
+/* ----------------------------------------------------------
+   BUTTONS
+-----------------------------------------------------------*/
+
+.btn-silver {
+    background: var(--light-silver);
+    color: var(--primary-teal);
+    border: 2px solid var(--primary-teal);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-silver:hover {
+    background: var(--primary-teal);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(14, 165, 165, 0.2);
+}
+
+.btn-primary {
+    background: var(--primary-teal);
+    border-color: var(--primary-teal);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #0d9191;
+    border-color: #0d9191;
+}
+
+/* ----------------------------------------------------------
+   HERO SECTION
+-----------------------------------------------------------*/
+
+.hero-section {
+    min-height: 60vh;
+    background: linear-gradient(135deg, var(--primary-navy) 0%, #1a355e 100%);
+    padding: 120px 0 80px 0;
+    display: flex;
+    align-items: center;
+}
+
+.hero-section h1 {
+    letter-spacing: 0.8px;
+    font-weight: 800;
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: white;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.hero-section p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    opacity: 0.98;
+    color: #e0e7ff;
+    margin-bottom: 2rem;
+}
+
+/* ----------------------------------------------------------
+   CARDS
+-----------------------------------------------------------*/
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(14, 165, 165, 0.15);
+    border-color: var(--primary-teal);
+}
+
+.card h5 {
+    color: var(--primary-teal);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+/* ----------------------------------------------------------
+   NAVBAR
+-----------------------------------------------------------*/
+
+.navbar {
+    background: var(--primary-navy) !important;
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    color: white !important;
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+.navbar-brand:hover {
+    color: var(--primary-teal) !important;
+}
+
+.btn-outline-light:hover {
+    background: var(--primary-teal);
+    border-color: var(--primary-teal);
+}
+
+/* ----------------------------------------------------------
+   FORMS
+-----------------------------------------------------------*/
+
+.form-control {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 0.75rem;
+    background: white;
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary-teal);
+    box-shadow: 0 0 0 3px rgba(14, 165, 165, 0.1);
+    background: white;
+}
+
+.form-label {
+    color: var(--text-dark);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* ----------------------------------------------------------
+   LOGIN CARD
+-----------------------------------------------------------*/
+
+.login-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.login-card h4 {
+    color: var(--primary-teal);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+/* ----------------------------------------------------------
+   ALERTS
+-----------------------------------------------------------*/
+
+.alert-danger {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+}
+
+.alert-success {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+}
+
+/* ----------------------------------------------------------
+   FOOTER
+-----------------------------------------------------------*/
+
+footer {
+    background: var(--primary-navy);
+    color: white;
+    margin-top: 4rem;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* ----------------------------------------------------------
+   SECTIONS
+-----------------------------------------------------------*/
+
+.py-5 {
+    padding: 3rem 0;
+    background: white;
+}
+
+/* ----------------------------------------------------------
+   LINKS
+-----------------------------------------------------------*/
+
+a {
+    color: var(--primary-teal);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: #0d9191;
+    text-decoration: underline;
+}
+
+/* ----------------------------------------------------------
+   HEADINGS
+-----------------------------------------------------------*/
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-dark);
+    letter-spacing: 0.3px;
+}
+
+.text-light {
+    color: var(--light-silver) !important;
+}
+
+.text-dark {
+    color: var(--text-dark) !important;
+}
+
+/* ----------------------------------------------------------
+   UTILITIES
+-----------------------------------------------------------*/
+
+.shadow-sm {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+}
+
+.shadow-md {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+}
+
+.text-md-end {
+    text-align: end;
+}
+
+@media (max-width: 768px) {
+    .text-md-end {
+        text-align: start;
+    }
+    
+    .hero-section {
+        padding: 80px 0 40px 0;
+    }
+}

@@ -8,8 +8,10 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\StockMovementController;
 
-// Landing
-Route::get('/', fn() => view('welcome'));
+// Landing - show welcome page, or redirect to dashboard if authenticated
+Route::get('/', function () {
+    return auth()->check() ? redirect()->route('dashboard') : view('welcome');
+});
 
 // Auth
 Route::get('login',[LoginController::class,'showLoginForm'])->name('login');
@@ -27,6 +29,22 @@ Route::post('register/admin/{company}',[AdminRegisterController::class,'register
 
 // Protected routes
 Route::middleware(['auth'])->group(function () {
+
+    // Dashboard routes based on role
+    Route::get('dashboard', function () {
+        $user = auth()->user();
+        if ($user->hasRole('super-admin')) {
+            return redirect()->route('superadmin.dashboard');
+        }
+        if ($user->hasRole('company-admin')) {
+            return redirect()->route('admin.dashboard');
+        }
+        return redirect()->route('staff.dashboard');
+    })->name('dashboard');
+
+    Route::get('superadmin/dashboard', fn() => view('dashboard.superadmin'))->name('superadmin.dashboard')->middleware('role:super-admin');
+    Route::get('admin/dashboard', fn() => view('dashboard.admin'))->name('admin.dashboard')->middleware('role:super-admin|company-admin');
+    Route::get('staff/dashboard', fn() => view('dashboard.staff'))->name('staff.dashboard');
 
     // Products (company-admin and super-admin)
     Route::middleware(['role:super-admin|company-admin'])->group(function () {

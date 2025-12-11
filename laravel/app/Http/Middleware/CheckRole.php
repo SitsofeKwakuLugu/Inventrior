@@ -7,14 +7,23 @@ use Illuminate\Http\Request;
 
 class CheckRole
 {
-    public function handle(Request $request, Closure $next, $role)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
         $user = $request->user();
 
-        if (!$user || !$user->hasRole($role)) {
-            abort(403, "Unauthorized");
+        if (!$user) {
+            return redirect()->route('login');
         }
 
-        return $next($request);
+        // Check if user has any of the required roles (roles are pipe-separated in route definition)
+        foreach ($roles as $roleString) {
+            // Handle pipe-separated roles like "super-admin|company-admin"
+            $roleList = explode('|', $roleString);
+            if ($user->hasRole($roleList)) {
+                return $next($request);
+            }
+        }
+
+        abort(403, "Unauthorized");
     }
 }

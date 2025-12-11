@@ -11,10 +11,12 @@ class Company extends Model
     use HasFactory, HasUuid;
 
     protected $fillable = [
+        'id',
         'name',
         'address',
         'email',
         'phone',
+        'verified',
     ];
 
     public function users()
