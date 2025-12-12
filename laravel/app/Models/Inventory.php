@@ -10,10 +10,14 @@ class Inventory extends Model
 {
     use HasFactory, HasUuid;
 
+    protected $table = 'inventory';
+
     protected $fillable = [
         'product_id',
         'company_id',
         'quantity',
+        'unit_price',
+        'average_cost',
     ];
 
     public function product()

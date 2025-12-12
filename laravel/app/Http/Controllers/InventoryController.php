@@ -55,6 +55,7 @@ class InventoryController extends Controller
             if (!$product->inventory) {
                 Inventory::create([
                     'product_id' => $product->id,
+                    'company_id' => $user->company_id,
                     'quantity' => $data['quantity'],
                     'unit_price' => $data['unit_cost'],
                     'location' => null,

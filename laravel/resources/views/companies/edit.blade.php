@@ -61,17 +61,17 @@
                                 <button type="submit" class="btn btn-silver w-100">Update Company</button>
                             </div>
                             <div class="col-md-6">
-                                <form action="{{ route('companies.destroy', $company) }}" method="POST">
-                                    @csrf @method('DELETE')
-                                    <button type="submit" class="btn btn-danger w-100" 
-                                            onclick="return confirm('Are you sure? This will permanently delete the company if it has no active users.')">
-                                        Delete Company
-                                    </button>
-                                </form>
+                                <a href="{{ route('superadmin.dashboard') }}" class="btn btn-light w-100">Back to Dashboard</a>
                             </div>
                         </div>
+                    </form>
 
-                        <a href="{{ route('superadmin.dashboard') }}" class="btn btn-light w-100 mt-2">Back to Dashboard</a>
+                    <form action="{{ route('companies.destroy', $company) }}" method="POST" class="mt-3">
+                        @csrf @method('DELETE')
+                        <button type="submit" class="btn btn-danger w-100" 
+                                onclick="return confirm('Are you sure? This will permanently delete the company if it has no active users.')">
+                            Delete Company
+                        </button>
                     </form>
                 </div>
             </div>
