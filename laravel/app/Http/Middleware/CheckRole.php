@@ -16,10 +16,12 @@ class CheckRole
         }
 
         // Check if user has any of the required roles (roles are pipe-separated in route definition)
+        $userRole = $user->role ?? 'staff';
+        
         foreach ($roles as $roleString) {
             // Handle pipe-separated roles like "super-admin|company-admin"
             $roleList = explode('|', $roleString);
-            if ($user->hasRole($roleList)) {
+            if (in_array($userRole, $roleList, true)) {
                 return $next($request);
             }
         }

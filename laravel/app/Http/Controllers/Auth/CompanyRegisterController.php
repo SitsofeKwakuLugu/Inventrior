@@ -3,10 +3,7 @@ namespace App\Http\Controllers\Auth;
 use App\Models\Company;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\CompanyVerificationMail;
 
 class CompanyRegisterController extends Controller
 {
@@ -34,12 +31,9 @@ class CompanyRegisterController extends Controller
             "address"=>$data["address"] ?? null,
             "phone"=>$data["phone"] ?? null,
             "code"=>strtoupper(substr(Str::uuid()->toString(),0,8)),
-            "verified"=>false
+            "verified"=>true
         ]);
 
-        $signedUrl = URL::signedRoute("company.verify", ["company"=>$company->id], now()->addHours(72));
-        Mail::to($company->email)->send(new CompanyVerificationMail($company,$signedUrl));
-
-        return redirect()->route("register.company")->with("success","Company registered! Check your email for verification link (valid for 72 hours).");
+        return redirect()->route("register.admin", ["company" => $company->id])->with("success","Company created! Now create your admin account.");
     }
 }

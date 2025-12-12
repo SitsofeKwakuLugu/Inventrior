@@ -12,13 +12,6 @@ class AdminRegisterController extends Controller
 {
     public function showAdminForm(Request $request, Company $company)
     {
-        // Ensure company is verified
-        if (!$company->verified) {
-            return redirect()
-                ->route("register.company")
-                ->withErrors("Company not verified.");
-        }
-
         return view("auth.register-admin", compact("company"));
     }
 
@@ -46,18 +39,14 @@ class AdminRegisterController extends Controller
             "name" => $data["name"],
             "email" => $data["email"],
             "password" => Hash::make($data["password"]),
+            "email_verified_at" => now()
         ]);
 
         // Assign company-admin role
         $user->assignRole("company-admin");
 
-        // Send verification email
-        if (method_exists($user, 'sendEmailVerificationNotification')) {
-            $user->sendEmailVerificationNotification();
-        }
-
         return redirect()
             ->route("login")
-            ->with("success", "Admin account created! Please verify your email before logging in.");
+            ->with("success", "Admin registered successfully! You can now log in.");
     }
 }

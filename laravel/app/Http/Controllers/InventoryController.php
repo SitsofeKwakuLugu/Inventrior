@@ -15,7 +15,6 @@ class InventoryController extends Controller
 
     public function __construct(AverageValuationService $valuation)
     {
-        $this->middleware('auth');
         $this->valuation = $valuation;
     }
 
@@ -36,22 +35,50 @@ class InventoryController extends Controller
     }
 
     /**
-     * Add stock to a product in inventory.
+     * Add stock to a product in inventory or create inventory if it doesn't exist.
      */
-    public function addStock(Request $request, Inventory $inventory)
+    public function addStock(Request $request, $inventoryOrProduct)
     {
         $data = $request->validate([
             'quantity' => 'required|integer|min:1',
             'unit_cost' => 'required|numeric|min:0',
         ]);
 
-        $this->valuation->applyIn(
-            $inventory->product_id,
-            $data['quantity'],
-            $data['unit_cost']
-        );
+        $user = Auth::user();
 
-        return back()->with('success', 'Stock added.');
+        // Check if it's a Product ID or Inventory ID
+        // Try to find as Product first
+        $product = Product::find($inventoryOrProduct);
+        
+        if ($product) {
+            // It's a product ID - create inventory if it doesn't exist
+            if (!$product->inventory) {
+                Inventory::create([
+                    'product_id' => $product->id,
+                    'quantity' => $data['quantity'],
+                    'unit_price' => $data['unit_cost'],
+                    'location' => null,
+                ]);
+                return back()->with('success', 'Inventory created successfully.');
+            } else {
+                // Product has inventory, add stock
+                $this->valuation->applyIn(
+                    $product->id,
+                    $data['quantity'],
+                    $data['unit_cost']
+                );
+                return back()->with('success', 'Stock added.');
+            }
+        } else {
+            // It's an Inventory ID
+            $inventory = Inventory::findOrFail($inventoryOrProduct);
+            $this->valuation->applyIn(
+                $inventory->product_id,
+                $data['quantity'],
+                $data['unit_cost']
+            );
+            return back()->with('success', 'Stock added.');
+        }
     }
 
     /**

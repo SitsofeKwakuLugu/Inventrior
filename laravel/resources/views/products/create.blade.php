@@ -1,7 +1,22 @@
-<div class="container">
-    <h1>Add Product</h1>
-    <a href="{{ route('products.index') }}" class="btn btn-secondary mb-3">Back</a>
+@extends('layout.app')
 
-    @include('products.form', ['route' => route('products.store'), 'method' => 'POST'])
+@section('content')
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header" style="background-color: var(--light-silver); border-bottom: 2px solid var(--primary-teal);">
+                    <h5 class="mb-0" style="color: var(--primary-navy);">Add New Product</h5>
+                </div>
+                <div class="card-body">
+                    <a href="{{ route('products.index') }}" class="btn btn-secondary mb-3">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </a>
+
+                    @include('products.form', ['route' => route('products.store'), 'method' => 'POST', 'product' => null])
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
